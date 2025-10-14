@@ -4,4 +4,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    background-size: cover;
+    background-position: center;
+
+    flex-direction: column;
+    gap: 4px;
+    text-shadow: 0px 4px 4px black;
 }
