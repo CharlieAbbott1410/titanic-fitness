@@ -12,7 +12,7 @@ export default function DesktopHeader(){
             <nav className="desktop-nav">
                 <NavLink to="/" className="nav-btn">Home</NavLink>
                 <NavLink to="/Workouts" className="nav-btn">Workouts</NavLink>
-                <NavLink to="/Auth" className="nav-btn">Join</NavLink>
+                <NavLink to="/Auth" className="primary-btn">Join</NavLink>
             </nav>
         </header>
     )
