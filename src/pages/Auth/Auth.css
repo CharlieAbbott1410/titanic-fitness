@@ -1,0 +1,57 @@
+.auth-layout{
+    display: flex;
+    >.hero-banner{
+        flex: 1;
+    }
+}
+.auth-form{
+    display: flex;
+    text-align: center;
+    margin: 16px;
+    width: 100%;
+    flex-direction: column;
+    gap: 8px;
+    >input{
+        min-height: 32px;
+    }
+    >input::placeholder{
+        color: black;
+    }
+    >.button-rows{
+        display: flex;
+        justify-content: space-between;
+        >.main-btn{
+            border: none;
+        }
+        >.page-change{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            >h2{
+                font-size: 16px;
+            }
+            >button{
+                background-color: transparent;
+                color: red;
+                border: none;
+            }
+        }
+    }
+}
+.auth-form-column{
+    border: 2px solid red;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@media only screen and (max-width:600px){
+    .auth-layout{
+        flex-direction: column;
+        min-height: 100vh;
+    }
+    .hero-banner{
+        max-height: 300px;
+        min-height: 0px;
+    }
+}
