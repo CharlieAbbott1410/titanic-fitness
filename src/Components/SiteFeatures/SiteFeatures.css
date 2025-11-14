@@ -47,5 +47,7 @@
         background-color: red;
         padding: 4px;
         align-self: flex-end;
+        text-decoration: none;
+        color: white;
     }
 }

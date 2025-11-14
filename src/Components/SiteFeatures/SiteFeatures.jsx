@@ -1,16 +1,37 @@
 import "./SiteFeatures.css"
+import {Link} from "react-router"
+import {useState} from "react"
+import axios from "axios"
 
-function FeatureThumbnail({title,description,dest}){
+function FeatureThumbnail({title,description,link}){
     return(
         <div className="feature-thumb">
             <h4>{title}</h4>
             <p>{description}</p>
-            <a href={dest}>Read More</a>
+            <Link to={link}>Read More</Link>
         </div>
     )
 }
 
 export default function SiteFeatures(){
+
+    const [articleData, setArticleData] = useState([]);
+    const url = "http://127.0.0.1:8001/auth/articles"
+
+    function loadThumbnails(){
+        axios.get(url)
+        .then((res) => {
+            //This is the code that runs when we get a good response
+            alert(JSON.stringify(res))
+        })
+        .catch((err)=> {
+            //This is the code that runs when something goes wrong
+            alert(err)
+        })
+    }
+
+    loadThumbnails()
+
 
     return(
         <div className="features-section">
