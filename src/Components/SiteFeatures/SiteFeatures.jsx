@@ -1,6 +1,6 @@
 import "./SiteFeatures.css"
 import {Link} from "react-router"
-import {useState} from "react"
+import {useState, useEffect} from "react"
 import axios from "axios"
 
 function FeatureThumbnail({title,description,link}){
@@ -16,22 +16,41 @@ function FeatureThumbnail({title,description,link}){
 export default function SiteFeatures(){
 
     const [articleData, setArticleData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState()
+
     const url = "http://127.0.0.1:8001/auth/articles"
 
     function loadThumbnails(){
         axios.get(url)
         .then((res) => {
             //This is the code that runs when we get a good response
-            alert(JSON.stringify(res))
+            setArticleData(res.data)
+            setLoading(false)
         })
         .catch((err)=> {
             //This is the code that runs when something goes wrong
-            alert(err)
+            setError(err?.response?.data?.detail || "Error Occured")
+            setLoading(false)
         })
     }
 
-    loadThumbnails()
+    
+    useEffect(() => {
+        loadThumbnails();
+    }, [])
 
+    let articles = null;
+    if (loading){
+        articles = <h1>Loading Articles...</h1>
+    } else if(error){
+        articles = <h1>There was an error!</h1>
+    }
+    else{
+        articles = articleData.map(thumb => {
+            return(<FeatureThumbnail title={thumb.title} description={thumb.description} link={thumb.link}/>)
+        })
+    }
 
     return(
         <div className="features-section">
@@ -40,12 +59,7 @@ export default function SiteFeatures(){
                 <h5>Hit the books</h5>
             </div>
             <div className="feature-container">
-                <FeatureThumbnail title="Sleep" description="And why its over rated" link="/" />
-                <FeatureThumbnail title="Nutrition" description="Why Wendy's and Monster Energy are optimal nutrition" link="/" />
-                <FeatureThumbnail title="Mewing" description="Don't stop the streak" link="/" />
-                <FeatureThumbnail title="Leg Day" description="To Do or Not to Do, That is the Question" link="/" />
-                <FeatureThumbnail title="Swimming" description="Could be useful..." link="/" />
-                <FeatureThumbnail title="Rest times" description="A year between sets could be the optimal timing" link="/" />
+                {articles}
             </div>
         </div>
     )
