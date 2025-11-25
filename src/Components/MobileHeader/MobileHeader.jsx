@@ -3,6 +3,8 @@ import LogoImage from "../../assets/Logo.png"
 import MenuIcon from "../../assets/MenuIcon.svg"
 import { NavLink } from "react-router"
 import { useState } from "react"
+import { useUser } from "../../contexts/UserContext"
+
 
 export default function () {
     const [open,setOpen] = useState(false);
@@ -14,11 +16,15 @@ export default function () {
     if (open){
         menuClassName = "Menu-Icon open"
     }
-
+    const {user, logout} = useUser();
     const navMenu =<nav className="mobile-nav">
     <NavLink to="/" className="nav-btn">Home</NavLink>
     <NavLink to="/Workouts" className="nav-btn">Workouts</NavLink>
-    <NavLink to="/Auth" className="primary-btn">Join</NavLink>
+    {
+        user ? <button className="primary-btn" onClick={logout}>Logout</button>
+        :<NavLink to="/Auth" className="primary-btn">Join</NavLink>
+
+    }
 </nav>
 
     return (

@@ -2,6 +2,7 @@ import "./Auth.css"
 import HeroBanner from "../../Components/HeroBanner/HeroBanner"
 import AuthImage1 from "../../assets/AuthBanner_01.png"
 import { useState } from "react"
+import { useUser } from "../../contexts/UserContext"
 
 function LoginForm({ toggle, header }) {
     return (
@@ -20,9 +21,18 @@ function LoginForm({ toggle, header }) {
     )
 }
 function RegisterForm({ toggle }) {
+    const {user, login} = useUser();
+
+    function registerUser(){
+        login({
+            "username" : "goober",
+            "email" : "goober@goobco.com"
+        })
+    }
     return (
-        <form className="auth-form">
-            <h1>Unsinkable gains await</h1>
+        <form className="auth-form" onSubmit={registerUser}>
+            <h1>Unsinkable Gains Await</h1>
+            {user ? <h1>Logged in user: {user.username}</h1> : null}
             <input placeholder="Email" type="text"></input>
             <input placeholder="Password" type="text"></input>
             <input placeholder="Display Name" type="text"></input>
