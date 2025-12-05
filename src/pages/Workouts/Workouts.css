@@ -1,0 +1,15 @@
+.Category-Btn{
+    background: none;
+    padding: 0px;
+    border: none;
+    color: white;
+    font-family: 'Inter';
+    font-size: 16px;
+}
+.active{
+    color: red;
+}
+.Categories-Container{
+    display: flex;
+    gap: 16px;
+}
