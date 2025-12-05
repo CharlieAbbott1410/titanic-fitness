@@ -19,7 +19,7 @@ export default function SiteFeatures(){
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState()
 
-    const url = "http://127.0.0.1:8001/auth/articles"
+    const url = "http://127.0.0.1:8001/public/articles"
 
     function loadThumbnails(){
         axios.get(url)
