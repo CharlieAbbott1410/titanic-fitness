@@ -1,13 +1,24 @@
 import { useEffect, useState } from "react"
 import "./Workouts.css"
 import axios from "axios"
+import { useUser } from "../../contexts/UserContext"
 
 export default function Workouts() {
     const [selected, setSelected] = useState(0)
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(true);
     const [categories, setCategories] = useState([]);
+    const { user } = useUser()
+    const [kg, setKg] = useState(50)
+    const [reps, setReps] = useState(5)
+    const [selectedExercise, setSelectedExercise] = useState()
+    const [date, setDate] = useState()
 
+    // needed for filter
+    const [filter, setFilter] = useState()
+    const [loadedExercises, setLoadedExercises] = useState(["fake exercise" , "second"])
+
+    const exerciseOptions = loadedExercises.map(ex => <option value={ex}>{ex}</option>)
     function getCategories() {
         const api_endpoint = "https://wger.de/api/v2/exercisecategory/"
         axios.get(api_endpoint)
@@ -15,7 +26,7 @@ export default function Workouts() {
 
                 setCategories(
                     [
-                        {id: 0, "name": "All"},
+                        { id: 0, "name": "All" },
                         ...res.data.results
                     ]
                 );
@@ -38,7 +49,7 @@ export default function Workouts() {
     }
 
     const filterBtns = categories.map((cat => {
-        return <button className={`Category-Btn ${selected === cat.id ? "active" : null}`} onClick={() => setSelected(cat.id) }>{cat.name}</button>
+        return <button className={`Category-Btn ${selected === cat.id ? "active" : null}`} onClick={() => setSelected(cat.id)}>{cat.name}</button>
     }))
 
 
@@ -46,6 +57,20 @@ export default function Workouts() {
         <>
             <div className="Categories-Container">
                 {filterBtns}
+
+            </div>
+            <div className="workouts-pages">
+                this is the workouts pages
+                {/* filter will go here */}
+                <select className="excercise-dropdown" value={selectedExercise} onChange={(e) => setSelectedExercise(e.target.value)} required>
+                    {exerciseOptions}
+                </select>
+                {selectedExercise}
+                <input type="date" required onChange={(e) => setDate(e.target.value)} value={date}/>
+                {date}
+                {/* qty selecter for kg */}
+                {/* qty selector for reps */}
+                <button type="submit" className="primary-btn">ADD</button>
             </div>
         </>
     )

@@ -6,10 +6,14 @@
     font-family: 'Inter';
     font-size: 16px;
 }
-.active{
-    color: red;
-}
+.Category-Btn.active{
+        color: red;
+    }
+
 .Categories-Container{
     display: flex;
     gap: 16px;
+}
+.workouts-pages{
+    margin-top: 150px;
 }

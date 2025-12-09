@@ -39,7 +39,6 @@
     }
 }
 .auth-form-column{
-    border: 2px solid red;
     flex: 1;
     display: flex;
     justify-content: center;
