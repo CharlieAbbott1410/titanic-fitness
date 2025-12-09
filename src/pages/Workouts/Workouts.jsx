@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import "./Workouts.css"
 import axios from "axios"
 import { useUser } from "../../contexts/UserContext"
+import QtySelector from "../../Components/QtySelector/QtySelector"
 
 export default function Workouts() {
     const [selected, setSelected] = useState(0)
@@ -16,7 +17,7 @@ export default function Workouts() {
 
     // needed for filter
     const [filter, setFilter] = useState()
-    const [loadedExercises, setLoadedExercises] = useState(["fake exercise" , "second"])
+    const [loadedExercises, setLoadedExercises] = useState(["fake exercise", "second"])
 
     const exerciseOptions = loadedExercises.map(ex => <option value={ex}>{ex}</option>)
     function getCategories() {
@@ -54,24 +55,23 @@ export default function Workouts() {
 
 
     return (
-        <>
-            <div className="Categories-Container">
-                {filterBtns}
-
-            </div>
-            <div className="workouts-pages">
-                this is the workouts pages
-                {/* filter will go here */}
+        <div className="Workout-Creator">
+            <form>
+                <div className="Categories-Container">
+                    {filterBtns}
+                </div>
                 <select className="excercise-dropdown" value={selectedExercise} onChange={(e) => setSelectedExercise(e.target.value)} required>
                     {exerciseOptions}
                 </select>
                 {selectedExercise}
-                <input type="date" required onChange={(e) => setDate(e.target.value)} value={date}/>
+                <input type="date" required onChage={(e) => setDate(e.target.value)} value={date} />
                 {date}
                 {/* qty selecter for kg */}
                 {/* qty selector for reps */}
+                <QtySelector num={kg} setNum={setKg} unit={"Kg"} step={2.5} />
+                <QtySelector num={reps} setNum={setReps} unit={reps > 1 ? "Reps" : "Rep"} step={1} />
                 <button type="submit" className="primary-btn">ADD</button>
-            </div>
-        </>
+            </form>
+        </div>
     )
 }

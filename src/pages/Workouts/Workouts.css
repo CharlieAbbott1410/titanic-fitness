@@ -14,6 +14,14 @@
     display: flex;
     gap: 16px;
 }
-.workouts-pages{
+.Workout-Creator{
+    display: flex;
     margin-top: 150px;
+    align-items: center;
+    flex-direction: column;
+    >form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }
