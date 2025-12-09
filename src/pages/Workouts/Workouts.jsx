@@ -16,8 +16,16 @@ export default function Workouts() {
     const [date, setDate] = useState()
 
     // needed for filter
-    const [filter, setFilter] = useState()
     const [loadedExercises, setLoadedExercises] = useState(["fake exercise", "second"])
+
+    function loadExercises(){
+        let url = "https://wger.de/api/v2/exerciseinfo/?language__code=2"
+        if (selected > 0){
+            url  += `?category=${selected}`
+        }
+        alert(url)
+    }
+    useEffect(loadExercises, [selected])
 
     const exerciseOptions = loadedExercises.map(ex => <option value={ex}>{ex}</option>)
     function getCategories() {
